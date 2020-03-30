@@ -1,17 +1,24 @@
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import emoji from 'node-emoji';
 import responseTime from 'response-time';
 import favicon from 'serve-favicon';
+import { generateFakePlayers } from './fixtures/player';
 import indexRouter from './routes/index';
+import { playerRoute } from './routes/player';
 
 const app = express();
+
+// load .env
+dotenv.config();
 
 // secure the server by setting various HTTP headers
 app.use(helmet());
@@ -47,23 +54,43 @@ app.use(responseTime());
 app.use(
   new rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 50, // limit each IP to 50 requests per windowMs
+    max: 999, // limit each IP to 50 requests per windowMs
     message: 'Too many requests from this IP, please try again in 15 minutes'
   })
 );
 
+console.log(
+  `mongodb://${process.env.TOTO}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
+);
+
+mongoose
+  .connect(
+    `mongodb://${process.env.TOTO}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
+  .then(() => {
+    console.log(emoji.get('white_check_mark'), ' MongoSB connection success !');
+  });
+
 // routes
 app.use('/', indexRouter);
+app.use('/player', playerRoute);
 
 // setup ip address and port number
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT);
 app.set('ipaddr', '0.0.0.0');
 
 // start express server
 app.listen(app.get('port'), app.get('ipaddr'), function () {
   console.log(
-    emoji.get('heart'),
+    emoji.get('pizza'),
     'The server is running @ ' + 'http://localhost/' + app.get('port'),
-    emoji.get('heart')
+    emoji.get('pizza')
   );
+
+  // Generate fixtures
+  generateFakePlayers();
 });

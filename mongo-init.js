@@ -1,10 +1,10 @@
 db.createUser({
-  user: "wassim-azirar",
-  pwd: "linkedin",
+  user: "root",
+  pwd: "root",
   roles: [
     {
       role: "readWrite",
-      db: "mern"
+      db: "anarchy"
     }
   ]
 });
