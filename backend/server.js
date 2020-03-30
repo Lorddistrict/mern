@@ -13,7 +13,6 @@ import responseTime from 'response-time';
 import favicon from 'serve-favicon';
 import { generateFakePlayers } from './fixtures/player';
 import indexRouter from './routes/index';
-import { playerRoute } from './routes/player';
 
 const app = express();
 
@@ -59,29 +58,28 @@ app.use(
   })
 );
 
-console.log(
-  `mongodb://${process.env.TOTO}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
-);
-
 mongoose
   .connect(
-    `mongodb://${process.env.TOTO}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`,
+    `${process.env.DB_ENGINE}://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
     }
   )
   .then(() => {
-    console.log(emoji.get('white_check_mark'), ' MongoSB connection success !');
+    console.log(emoji.get('white_check_mark'), ' MongoDB connection success !');
+  })
+  .catch(error => {
+    console.log('MongoDB connection failed...');
   });
 
 // routes
 app.use('/', indexRouter);
-app.use('/player', playerRoute);
+//app.use('/player', playerRoute);
 
 // setup ip address and port number
 app.set('port', process.env.PORT);
-app.set('ipaddr', '0.0.0.0');
+app.set('ipaddr', '127.0.0.1');
 
 // start express server
 app.listen(app.get('port'), app.get('ipaddr'), function () {

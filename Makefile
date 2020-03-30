@@ -28,6 +28,12 @@ start: docker-compose.yml
 stop:
 	$(DC) down
 
+.PHONY: restart ## Restart the project
+restart:
+	make stop
+	make start
+	cd $(PWD)/backend && yarn start
+
 .PHONY: exec ## Run bash in the mongodb container
 exec:
 	$(DE) -it $(CONTAINER) bash
