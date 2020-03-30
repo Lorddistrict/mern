@@ -11,8 +11,8 @@ import morgan from 'morgan';
 import emoji from 'node-emoji';
 import responseTime from 'response-time';
 import favicon from 'serve-favicon';
-import { generateFakePlayers } from './fixtures/player';
 import indexRouter from './routes/index';
+import playerRouter from './routes/player';
 
 const app = express();
 
@@ -75,11 +75,11 @@ mongoose
 
 // routes
 app.use('/', indexRouter);
-//app.use('/player', playerRoute);
+app.use('/player', playerRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT);
-app.set('ipaddr', '127.0.0.1');
+app.set('ipaddr', '0.0.0.0');
 
 // start express server
 app.listen(app.get('port'), app.get('ipaddr'), function () {
@@ -90,5 +90,5 @@ app.listen(app.get('port'), app.get('ipaddr'), function () {
   );
 
   // Generate fixtures
-  generateFakePlayers();
+  //generateFakePlayers();
 });
