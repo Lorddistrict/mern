@@ -2,8 +2,6 @@ export const verifyToken = (req, res) => {
   // Get auth header value
   let bearerHeader = req.headers['authorization'];
 
-  console.log(bearerHeader);
-
   if (typeof bearerHeader !== 'undefined') {
     let bearer = bearerHeader.split(' ');
 

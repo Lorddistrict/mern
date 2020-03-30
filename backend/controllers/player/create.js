@@ -17,8 +17,8 @@ export const create = (req, res) => {
   })
     .then(playerFound => {
       if (!playerFound) {
-        jwt.verify(req.token, process.env.JWT_SECRET_KEY, (error, authData) => {
-          if (error || authData.player.role !== 'ADMIN') {
+        jwt.verify(req.token, process.env.JWT_SECRET_KEY, (error, creator) => {
+          if (error || creator.player.role !== 'ADMIN') {
             res.status(403);
 
             return res.json({
@@ -27,18 +27,18 @@ export const create = (req, res) => {
             });
           } else {
             try {
-              console.log(player);
               player.uuid = generateToken();
               player.role = 'PLAYER';
               player.password = generateEncryptedGenerator(player.password);
               player.save();
+
               res.status(201);
 
               return res.json({
                 status: '201',
                 message: 'Player created',
                 player: player,
-                authData: authData
+                creator: creator
               });
             } catch (error) {
               res.status(400);

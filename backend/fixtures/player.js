@@ -18,8 +18,6 @@ export const generateFakePlayers = () => {
   dummyPlayer.role = 'USER';
   dummyPlayer.save();
 
-  console.log(dummyPlayer.password);
-
   // Generate test admin
   let dummyAdmin = new Player();
 

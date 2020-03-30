@@ -13,7 +13,7 @@ export const getOneById = (req, res) => {
 
       return res.json({
         status: '404',
-        message: 'Not found'
+        message: 'Player not found'
       });
     }
 
@@ -36,7 +36,7 @@ export const getAll = (req, res) => {
 
       return res.json({
         status: '404',
-        message: 'Not found'
+        message: 'Player not found'
       });
     }
 
