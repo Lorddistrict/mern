@@ -10,9 +10,9 @@ import Sha256 from 'crypto-js/sha256';
 export const generateEncryptedGenerator = passToEncrypt => {
   let password;
 
-  if (passToEncrypt !== null) {
+  if (passToEncrypt !== undefined) {
     return (password = Sha256(passToEncrypt));
   } else {
-    return (password = Sha256(process.env.PASSWORD_ENCRYPTED_FAKER));
+    return (password = Sha256(`${process.env.PASSWORD_ENCRYPTED_FAKER}`));
   }
 };

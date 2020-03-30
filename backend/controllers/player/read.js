@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { PlayerSchema } from '../../models/player';
+import { verifyToken } from '../../services/verifyJsonWebToken';
 
 const Player = mongoose.model('Player', PlayerSchema);
 
@@ -14,6 +15,9 @@ export const getOneById = (req, res) => {
 };
 
 export const getAll = (req, res) => {
+
+  verifyToken(req, res);
+
   Player.find({}, (error, players) => {
     if (error) {
       res.status(404);

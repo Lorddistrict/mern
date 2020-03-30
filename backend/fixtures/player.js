@@ -13,16 +13,18 @@ export const generateFakePlayers = () => {
   let dummyPlayer = new Player();
 
   dummyPlayer.uuid = generateToken();
-  dummyPlayer.email = 'player@player.com';
+  dummyPlayer.email = 'player@mail.com';
   dummyPlayer.password = generateEncryptedGenerator();
-  dummyPlayer.role = 'PLAYER';
+  dummyPlayer.role = 'USER';
   dummyPlayer.save();
+
+  console.log(dummyPlayer.password);
 
   // Generate test admin
   let dummyAdmin = new Player();
 
   dummyAdmin.uuid = generateToken();
-  dummyAdmin.email = 'admin@admin.com';
+  dummyAdmin.email = 'admin@mail.com';
   dummyAdmin.password = generateEncryptedGenerator();
   dummyAdmin.role = 'ADMIN';
   dummyAdmin.save();
@@ -33,7 +35,7 @@ export const generateFakePlayers = () => {
     player.uuid = generateToken();
     player.email = faker.internet.email();
     player.password = generateEncryptedGenerator();
-    player.role = 'PLAYER';
+    player.role = 'USER';
     player.save();
   }
 };
