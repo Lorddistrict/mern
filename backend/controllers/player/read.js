@@ -5,26 +5,15 @@ import { verifyToken } from '../../services/verifyJsonWebToken';
 const Player = mongoose.model('Player', PlayerSchema);
 
 export const getOneById = (req, res) => {
-  console.log(42);
-  Player.findById({}, (error, player) => {
-    if (error) {
-      res.status(404).send(error);
-    }
-    res.status(200).json(player);
-  });
-};
-
-export const getAll = (req, res) => {
-
   verifyToken(req, res);
 
-  Player.find({}, (error, players) => {
+  Player.findOne({ uuid: req.params.id }, (error, player) => {
     if (error) {
       res.status(404);
 
       return res.json({
-        status: '400',
-        message: 'KO'
+        status: '404',
+        message: 'Not found'
       });
     }
 
@@ -32,7 +21,30 @@ export const getAll = (req, res) => {
 
     return res.json({
       status: '200',
-      message: 'OK',
+      message: 'Player returned',
+      player: player
+    });
+  });
+};
+
+export const getAll = (req, res) => {
+  verifyToken(req, res);
+
+  Player.find({}, (error, players) => {
+    if (error) {
+      res.status(404);
+
+      return res.json({
+        status: '404',
+        message: 'Not found'
+      });
+    }
+
+    res.status(200);
+
+    return res.json({
+      status: '200',
+      message: 'Player(s) returned',
       players: players
     });
   });
