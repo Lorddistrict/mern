@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "9b3b558d-c973-46c7-babd-34cdb99837fb",
+		"name": "Anarchy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Player",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF5ZXIiOnsiY3JlYXRlZF9hdCI6IjIwMjAtMDMtMzBUMjA6MzM6NDguMzY1WiIsIl9pZCI6IjVlODI1N2FjYWExZjU1MjRjZTY5YTY2OCIsInV1aWQiOiI0bmJxN0xZWWVNTGtRTHN3WXgzRnNIIiwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsInBhc3N3b3JkIjoiNDgxMzQ5NGQxMzdlMTYzMWJiYTMwMWQ1YWNhYjZlN2JiN2FhNzRjZTExODVkNDU2NTY1ZWY1MWQ3Mzc2NzdiMiIsInJvbGUiOiJBRE1JTiIsIl9fdiI6MH0sImlhdCI6MTU4NTYwMDQ0MH0.nWOrpcfBpvqT8ZOftt63uLiKNEm2aXfSw_DR42DttCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/player",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOneById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF5ZXIiOnsiY3JlYXRlZF9hdCI6IjIwMjAtMDMtMzBUMjA6MzM6NDguMzY1WiIsIl9pZCI6IjVlODI1N2FjYWExZjU1MjRjZTY5YTY2OCIsInV1aWQiOiI0bmJxN0xZWWVNTGtRTHN3WXgzRnNIIiwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsInBhc3N3b3JkIjoiNDgxMzQ5NGQxMzdlMTYzMWJiYTMwMWQ1YWNhYjZlN2JiN2FhNzRjZTExODVkNDU2NTY1ZWY1MWQ3Mzc2NzdiMiIsInJvbGUiOiJBRE1JTiIsIl9fdiI6MH0sImlhdCI6MTU4NTYwMDQ0MH0.nWOrpcfBpvqT8ZOftt63uLiKNEm2aXfSw_DR42DttCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/player/X2K6xC6kgbL8iJHMwiM2hM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"player",
+								"X2K6xC6kgbL8iJHMwiM2hM"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF5ZXIiOnsiY3JlYXRlZF9hdCI6IjIwMjAtMDMtMzBUMjA6MzM6NDguMzY1WiIsIl9pZCI6IjVlODI1N2FjYWExZjU1MjRjZTY5YTY2OCIsInV1aWQiOiI0bmJxN0xZWWVNTGtRTHN3WXgzRnNIIiwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsInBhc3N3b3JkIjoiNDgxMzQ5NGQxMzdlMTYzMWJiYTMwMWQ1YWNhYjZlN2JiN2FhNzRjZTExODVkNDU2NTY1ZWY1MWQ3Mzc2NzdiMiIsInJvbGUiOiJBRE1JTiIsIl9fdiI6MH0sImlhdCI6MTU4NTYwMDQ0MH0.nWOrpcfBpvqT8ZOftt63uLiKNEm2aXfSw_DR42DttCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "umnikudochiki@email.fr",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/player",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF5ZXIiOnsiY3JlYXRlZF9hdCI6IjIwMjAtMDMtMzBUMjA6MzM6NDguMzY1WiIsIl9pZCI6IjVlODI1N2FjYWExZjU1MjRjZTY5YTY2OCIsInV1aWQiOiI0bmJxN0xZWWVNTGtRTHN3WXgzRnNIIiwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsInBhc3N3b3JkIjoiNDgxMzQ5NGQxMzdlMTYzMWJiYTMwMWQ1YWNhYjZlN2JiN2FhNzRjZTExODVkNDU2NTY1ZWY1MWQ3Mzc2NzdiMiIsInJvbGUiOiJBRE1JTiIsIl9fdiI6MH0sImlhdCI6MTU4NTYwMDQ0MH0.nWOrpcfBpvqT8ZOftt63uLiKNEm2aXfSw_DR42DttCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "newplayer@mail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/player/X2K6xC6kgbL8iJHMwiM2hM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"player",
+								"X2K6xC6kgbL8iJHMwiM2hM"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "root",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/security/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
