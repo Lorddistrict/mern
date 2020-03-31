@@ -10,8 +10,8 @@ module.exports = (req, res, next) => {
   }
 
   try {
-    const bearer = auth.split(' ');
-    jwt.verify(bearer[1]);
+    const bearer = auth.split(' ')[1];
+    jwt.verify(bearer, process.env.JWT_SECRET_KEY);
     next();
   } catch (e) {
     res.status(401).send('Unauthorized');

@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const { PlayerSchema } = require('../../models/Player');
-
-const Player = mongoose.model('Player', PlayerSchema);
+const { Player } = require('../../models/Player');
 
 module.exports = {
   update: async (req, res) => {

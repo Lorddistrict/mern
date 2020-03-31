@@ -7,7 +7,7 @@ const Sha256 = require('crypto-js/sha256');
  * @param passToEncrypt
  * @returns {*}
  */
-export const generateEncryptedPassword = passToEncrypt => {
+export const encrypt = passToEncrypt => {
   if (passToEncrypt) {
     return (Sha256(passToEncrypt));
   }

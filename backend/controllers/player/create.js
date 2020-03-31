@@ -1,9 +1,6 @@
-const mongoose = require('mongoose');
-const { PlayerSchema } = require('../../models/Player');
-const { generateEncryptedPassword } = require('../../services/passwordEncryptedGenerator');
+const { Player } = require('../../models/Player');
+const { generateEncryptedPassword } = require('../../services/encrypt');
 const { generateToken } = require('../../services/tokenGenerator');
-
-const Player = mongoose.model('Player', PlayerSchema);
 
 module.exports = {
   create: async (req, res) => {

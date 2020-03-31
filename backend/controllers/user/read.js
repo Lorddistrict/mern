@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const { UserSchema } = require('../../models/User');
-
-const User = mongoose.model('User', UserSchema);
+const { User } = require('../../models/User');
 
 module.exports = {
   getOneById: async (req, res) => {
