@@ -4,24 +4,24 @@ const { Schema } = require('mongoose');
 const PlayerSchema = new Schema({
   uuid: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   role: {
     type: String,
-    required: true
+    required: true,
   },
   created_at: {
     type: Date,
     default: Date.now(),
-    required: true
+    required: true,
   },
 });
 

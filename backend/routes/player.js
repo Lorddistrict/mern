@@ -1,5 +1,5 @@
 const express = require('express');
-const { create, getAll, getOneById, update } = require('../controllers/player/PlayerController');
+const { create, getAll, getOneById, update, remove } = require('../controllers/player/PlayerController');
 const auth = require('../services/auth');
 const authAndAdmin = require('../services/authAndAdmin');
 
@@ -9,13 +9,16 @@ let playerRouter = express.Router();
 playerRouter.use(auth);
 
 // GET
-playerRouter.get('/', getAll);
-playerRouter.get('/:id', getOneById);
+playerRouter.get('/', auth, getAll);
+playerRouter.get('/:id', auth, getOneById);
 
 // POST
 playerRouter.post('/', authAndAdmin, create);
 
 // PUT
-playerRouter.put('/:id', update);
+playerRouter.put('/:id', authAndAdmin, update);
+
+// DELETE
+playerRouter.delete('/', authAndAdmin, remove);
 
 export default playerRouter;

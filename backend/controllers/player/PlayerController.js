@@ -5,7 +5,7 @@ const { update } = require('./update');
 
 module.exports = {
   create,
-  delete: remove,
+  remove,
   getOneById,
   getAll,
   update,
