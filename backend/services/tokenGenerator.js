@@ -1,7 +1,9 @@
-import tokenGenerator from 'uuid-token-generator';
+const tokenGenerator = require('uuid-token-generator');
 
-export const generateToken = () => {
-  let token = new tokenGenerator();
+module.exports = {
+  generateToken: () => {
+    let token = new tokenGenerator();
 
-  return token.generate();
+    return token.generate();
+  },
 };

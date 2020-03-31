@@ -1,7 +1,7 @@
 const crypto = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const { PlayerSchema } = require('../../models/player');
+const { PlayerSchema } = require('../../models/Player');
 
 const Player = mongoose.model('Player', PlayerSchema);
 

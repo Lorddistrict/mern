@@ -1,11 +1,11 @@
 const express = require('express');
-const { getAll } = require('../controllers/user/userController');
-const { verifyToken } = require('../services/verifyJsonWebToken');
+const { getAll } = require('../controllers/user/UserController');
+const auth = require('../services/auth');
 
-let playerRouter = express.Router();
+let userRouter = express.Router();
 
 // GET
 
-playerRouter.get('/', verifyToken, getAll);
+userRouter.get('/', auth, getAll);
 
-export default playerRouter;
+export default userRouter;

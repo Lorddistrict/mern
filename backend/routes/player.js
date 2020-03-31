@@ -1,12 +1,12 @@
 const express = require('express');
-const { create, getAll, getOneById, update } = require('../controllers/player/playerController');
-const { verifyToken } = require('../services/verifyJsonWebToken');
+const { create, getAll, getOneById, update } = require('../controllers/player/PlayerController');
+const auth = require('../services/auth');
 const authAndAdmin = require('../services/authAndAdmin');
 
 let playerRouter = express.Router();
 
 // Use the verifyToken middleware for all endpoint
-playerRouter.use(verifyToken);
+playerRouter.use(auth);
 
 // GET
 playerRouter.get('/', getAll);

@@ -15,6 +15,7 @@ import { generateFakePlayers } from './fixtures/player';
 import indexRouter from './routes/index';
 import playerRouter from './routes/player';
 import securityRouter from './routes/security';
+import userRouter from './routes/user';
 
 const app = express();
 
@@ -71,7 +72,7 @@ mongoose
   .then(() => {
     console.log(emoji.get('white_check_mark'), ' MongoDB connection success !');
   })
-  .catch(error => {
+  .catch(() => {
     console.log('MongoDB connection failed...');
   });
 
@@ -79,6 +80,7 @@ mongoose
 app.use('/', indexRouter);
 app.use('/player', playerRouter);
 app.use('/security', securityRouter);
+app.use('/user', userRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT);

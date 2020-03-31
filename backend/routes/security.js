@@ -1,5 +1,5 @@
 import express from 'express';
-import { login } from '../controllers/security/securityController';
+import { login } from '../controllers/security/SecurityController';
 
 let securityRouter = express.Router();
 

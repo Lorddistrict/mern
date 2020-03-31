@@ -1,6 +1,6 @@
 const faker = require('faker');
 const mongoose = require('mongoose');
-const { PlayerSchema } = require('../models/player');
+const { PlayerSchema } = require('../models/Player');
 const { generateEncryptedGenerator } = require('../services/passwordEncryptedGenerator');
 const { generateToken } = require('../services/tokenGenerator');
 

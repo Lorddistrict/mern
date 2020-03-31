@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { PlayerSchema } = require('../../models/player');
+const { PlayerSchema } = require('../../models/Player');
 const { generateEncryptedPassword } = require('../../services/passwordEncryptedGenerator');
 const { generateToken } = require('../../services/tokenGenerator');
 
