@@ -2,7 +2,7 @@ const _ = require(`lodash`);
 const bcrypt = require(`bcrypt`);
 const User = require(`v1/models/User`);
 const appKey = require(`@/lib/app-key`);
-const saltRounds = process.env.BCRYPT_SALT_ROUNDS || 10;
+const saltRounds = 10;
 
 module.exports = {
   store: async (req, res) => {

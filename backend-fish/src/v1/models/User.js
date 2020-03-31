@@ -1,4 +1,4 @@
-const { Schema, model } = require(`mongoose`);
+const { Schema, model } = require(`@/lib/mongoose`);
 
 const userSchema = new Schema({
   firstname: String,
