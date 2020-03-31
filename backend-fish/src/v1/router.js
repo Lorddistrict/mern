@@ -25,7 +25,6 @@ fishesRouter.post(`/`, FishController.store);
 fishesRouter.put(`/:id`, FishController.update);
 fishesRouter.delete(`/:id`, FishController.destroy);
 
-
 module.exports = [
   {
     prefix: `/auth`,

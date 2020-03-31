@@ -10,7 +10,7 @@ module.exports = {
         email: req.body.email,
       });
       if (!user) {
-        throw new Error(`Email or password not valid!`)
+        throw new Error(`Email or password not valid!`);
       }
       await bcrypt.compare(`${req.body.password}${appKey}`, user.password);
       const token = await jwt.sign({
