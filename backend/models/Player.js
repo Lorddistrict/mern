@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
 const PlayerSchema = new Schema({
-  uuid: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
@@ -18,6 +14,10 @@ const PlayerSchema = new Schema({
     type: String,
     required: true,
   },
+  messages: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Message',
+  }],
   created_at: {
     type: Date,
     default: Date.now(),
@@ -27,6 +27,4 @@ const PlayerSchema = new Schema({
 
 const Player = mongoose.model('Player', PlayerSchema);
 
-module.exports = {
-  Player,
-};
+module.exports = Player;

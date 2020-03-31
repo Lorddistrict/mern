@@ -1,13 +1,13 @@
-const { Player } = require('../../models/Player');
+const Player = require('../../models/Player');
 
 module.exports = {
   remove: async (req, res) => {
     try {
-      await Player.remove({ uuid: req.params.playerUID });
+      await Player.remove({ _id: req.params.id });
 
-      res.status(200).send({ message: 'Player deleted' });
+      res.status(200).send({ response: 'Player deleted' });
     } catch (e) {
-      res.status(500).send({ message: 'Cannot delete player' });
+      res.status(500).send({ response: 'Cannot delete player' });
     }
   },
 };

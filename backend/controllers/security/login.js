@@ -1,6 +1,6 @@
 const crypto = require('crypto-js');
 const jwt = require('jsonwebtoken');
-const { Player } = require('../../models/Player');
+const Player = require('../../models/Player');
 
 export const login = (req, res) => {
   let email = req.body.email;

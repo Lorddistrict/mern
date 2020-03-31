@@ -15,7 +15,7 @@ import { generateFakePlayers } from './fixtures/player';
 import indexRouter from './routes/index';
 import playerRouter from './routes/player';
 import securityRouter from './routes/security';
-import userRouter from './routes/user';
+import messageRouter from './routes/message';
 
 const app = express();
 
@@ -78,9 +78,9 @@ mongoose
 
 // routes
 app.use('/', indexRouter);
-app.use('/player', playerRouter);
+app.use('/messages', messageRouter);
+app.use('/players', playerRouter);
 app.use('/security', securityRouter);
-app.use('/user', userRouter);
 
 // setup ip address and port number
 app.set('port', process.env.PORT);

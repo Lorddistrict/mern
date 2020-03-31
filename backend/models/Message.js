@@ -1,17 +1,14 @@
+const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-module.exports = new Schema({
-  uuid: {
-    type: String,
-    required: true,
-  },
-  message: {
+const MessageSchema = new Schema({
+  content: {
     type: String,
     required: true,
   },
   created_by: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Player',
   },
   created_at: {
     type: Date,
@@ -19,3 +16,7 @@ module.exports = new Schema({
     required: true,
   },
 });
+
+const Message = mongoose.model('Message', MessageSchema);
+
+module.exports = Message;
