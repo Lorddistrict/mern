@@ -5,7 +5,6 @@ const appKey = require(`@/lib/app-key`);
 const saltRounds = process.env.BCRYPT_SALT_ROUNDS || 10;
 
 module.exports = {
-  index: async (req, res) => res.send(await User.find()),
   store: async (req, res) => {
     const user = await User.findOne({
       email: req.body.email,
