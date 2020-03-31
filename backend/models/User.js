@@ -1,22 +1,24 @@
-import { Schema } from 'mongoose';
+const { Schema } = require('mongoose');
 
-export const PlayerSchema = new Schema({
+module.exports = new Schema({
   uuid: {
     type: String,
     required: true
   },
-  email: {
+  userName: {
     type: String,
     required: true
   },
-  password: {
+  lastName: {
     type: String,
     required: true
   },
-  role: {
-    type: String,
-    required: true
-  },
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Message'
+    }
+  ],
   created_at: {
     type: Date,
     default: Date.now(),

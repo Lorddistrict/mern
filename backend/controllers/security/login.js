@@ -1,7 +1,7 @@
-import crypto from 'crypto-js';
-import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-import { PlayerSchema } from '../../models/player';
+const crypto = require('crypto-js');
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const { PlayerSchema } = require('../../models/player');
 
 const Player = mongoose.model('Player', PlayerSchema);
 
@@ -23,30 +23,20 @@ export const login = (req, res) => {
           player: player
         });
       } else {
-        jwt.sign(
-          {
-            player: player
-          },
-          process.env.JWT_SECRET_KEY,
-          (error, token) => {
-            res.status(200);
-
-            return res.json({
-              status: '200',
-              message: 'Player has been found',
-              player: player,
-              token: token
-            });
-          }
-        );
+        jwt.sign({ player }, process.env.JWT_SECRET_KEY, token => {
+          res.status(200);
+          res.json({
+            message: 'Player has been found',
+            player,
+            token,
+          });
+        });
       }
     })
-    .catch(error => {
+    .catch(() => {
       res.status(500);
-
-      return res.json({
-        status: '500',
-        message: 'Something went wrong'
+      res.json({
+        message: 'Something went wrong',
       });
     });
 };

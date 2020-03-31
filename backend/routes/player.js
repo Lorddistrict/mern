@@ -1,21 +1,21 @@
-import express from 'express';
-import { create, getAll, getOneById, update } from '../controllers/player/playerController';
+const express = require('express');
+const { create, getAll, getOneById, update } = require('../controllers/player/playerController');
+const { verifyToken } = require('../services/verifyJsonWebToken');
+const authAndAdmin = require('../services/authAndAdmin');
 
 let playerRouter = express.Router();
 
-// GET
+// Use the verifyToken middleware for all endpoint
+playerRouter.use(verifyToken);
 
+// GET
 playerRouter.get('/', getAll);
-/** :id => uuid */
 playerRouter.get('/:id', getOneById);
 
-// PUT
-
-playerRouter.put('/', create);
-
 // POST
+playerRouter.post('/', authAndAdmin, create);
 
-/** :id => uuid */
-playerRouter.post('/:id', update);
+// PUT
+playerRouter.put('/:id', update);
 
 export default playerRouter;

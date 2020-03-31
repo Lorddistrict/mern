@@ -1,51 +1,20 @@
-import mongoose from 'mongoose';
-import { PlayerSchema } from '../../models/player';
-import { verifyToken } from '../../services/verifyJsonWebToken';
+const mongoose = require('mongoose');
+const { PlayerSchema } = require('../../models/player');
 
 const Player = mongoose.model('Player', PlayerSchema);
 
-export const getOneById = (req, res) => {
-  verifyToken(req, res);
+module.exports = {
+  getOneById: async (req, res) => {
+    try {
+      const player = await Player.findOne({ uuid: req.params.id });
 
-  Player.findOne({ uuid: req.params.id }, (error, player) => {
-    if (error) {
-      res.status(404);
-
-      return res.json({
-        status: '404',
-        message: 'Player not found'
+      res.send({
+        message: 'Player returned',
+        player
       });
+    } catch(e) {
+      res.status(404).send({ message: 'Player not found' });
     }
-
-    res.status(200);
-
-    return res.json({
-      status: '200',
-      message: 'Player returned',
-      player: player
-    });
-  });
-};
-
-export const getAll = (req, res) => {
-  verifyToken(req, res);
-
-  Player.find({}, (error, players) => {
-    if (error) {
-      res.status(404);
-
-      return res.json({
-        status: '404',
-        message: 'Player not found'
-      });
-    }
-
-    res.status(200);
-
-    return res.json({
-      status: '200',
-      message: 'Player(s) returned',
-      players: players
-    });
-  });
+  },
+  getAll: async (req, res) => res.send(await Player.find()),
 };

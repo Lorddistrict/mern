@@ -1,72 +1,24 @@
-import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-import { PlayerSchema } from '../../models/player';
-import { generateEncryptedGenerator } from '../../services/passwordEncryptedGenerator';
-import { generateToken } from '../../services/tokenGenerator';
-import { verifyToken } from '../../services/verifyJsonWebToken';
+const mongoose = require('mongoose');
+const { PlayerSchema } = require('../../models/player');
+const { generateEncryptedPassword } = require('../../services/passwordEncryptedGenerator');
+const { generateToken } = require('../../services/tokenGenerator');
 
 const Player = mongoose.model('Player', PlayerSchema);
 
-export const create = (req, res) => {
-  let player = new Player(req.body);
+module.exports = {
+  create: async (req, res) => {
+    const playerFound = await Player.findOne({ email: req.body.email });
+    if (playerFound) {
+      res.status(400).send({ message: 'Email already taken' });
 
-  verifyToken(req, res);
+      return;
+    }
 
-  Player.findOne({
-    email: req.body.email
-  })
-    .then(playerFound => {
-      if (!playerFound) {
-        jwt.verify(req.token, process.env.JWT_SECRET_KEY, (error, creator) => {
-          if (error || creator.player.role !== 'ADMIN') {
-            res.status(403);
-
-            return res.json({
-              status: '403',
-              message: 'You do not have access'
-            });
-          } else {
-            try {
-              player.uuid = generateToken();
-              player.role = 'PLAYER';
-              player.password = generateEncryptedGenerator(player.password);
-              player.save();
-
-              res.status(201);
-
-              return res.json({
-                status: '201',
-                message: 'Player created',
-                player: player,
-                creator: creator
-              });
-            } catch (error) {
-              res.status(400);
-
-              return res.json({
-                status: '400',
-                message: 'Cannot create player',
-                player: player
-              });
-            }
-          }
-        });
-      } else {
-        res.status(403);
-
-        return res.json({
-          status: '403',
-          message: 'This mail is already used',
-          player: playerFound
-        });
-      }
-    })
-    .catch(error => {
-      res.status(500);
-
-      return res.json({
-        status: '500',
-        message: 'Something went wrong'
-      });
-    });
+    res.status(201).send(await Player.create({
+      uuid: generateToken(),
+      email: req.params.email,
+      password: generateEncryptedPassword(req.params.password),
+      role: 'PLAYER',
+    }));
+  },
 };

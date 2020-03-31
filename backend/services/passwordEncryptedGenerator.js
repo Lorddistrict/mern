@@ -1,4 +1,4 @@
-import Sha256 from 'crypto-js/sha256';
+const Sha256 = require('crypto-js/sha256');
 
 /**
  * Return the default password encrypted, defined on the .env file
@@ -7,12 +7,10 @@ import Sha256 from 'crypto-js/sha256';
  * @param passToEncrypt
  * @returns {*}
  */
-export const generateEncryptedGenerator = passToEncrypt => {
-  let password;
-
-  if (passToEncrypt !== undefined) {
-    return (password = Sha256(passToEncrypt));
-  } else {
-    return (password = Sha256(`${process.env.PASSWORD_ENCRYPTED_FAKER}`));
+export const generateEncryptedPassword = passToEncrypt => {
+  if (passToEncrypt) {
+    return (Sha256(passToEncrypt));
   }
+
+  return (Sha256(process.env.PASSWORD_ENCRYPTED_FAKER));
 };

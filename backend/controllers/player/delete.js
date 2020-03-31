@@ -1,20 +1,16 @@
-import mongoose from 'mongoose';
-import { PlayerSchema } from '../../models/player';
+const mongoose = require('mongoose');
+const { PlayerSchema } = require('../../models/player');
 
 const Player = mongoose.model('Player', PlayerSchema);
 
-export const remove = (req, res) => {
-  Player.remove(
-    {
-      uuid: req.params.playerUID
-    },
-    (error, player) => {
-      if (error) {
-        res.status(400).send(error);
-      }
-      res.status(200).json({
-        message: 'Player deleted !'
-      });
+module.exports = {
+  remove: async (req, res) => {
+    try {
+      await Player.remove({ uuid: req.params.playerUID });
+
+      res.status(200).send({ message: 'Player deleted' });
+    } catch (e) {
+      res.status(500).send({ message: 'Cannot delete player' });
     }
-  );
+  },
 };
