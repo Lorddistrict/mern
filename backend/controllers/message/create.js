@@ -9,7 +9,7 @@ module.exports = {
 
     const message = await Message.create({
       content: req.body.content,
-      created_by: player,
+      created_by: player._id,
     });
 
     res.status(201).send({
