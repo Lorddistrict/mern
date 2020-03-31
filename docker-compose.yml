@@ -1,14 +1,24 @@
 version: "3.7"
 services:
   mongo:
-    image: mongo:latest
-    container_name: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_DATABASE: anarchy
+    image: mongo:4
     ports:
-      - 27017:27017
+      - 127.0.0.1:27017:27017
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongo:/data/db
+  fish:
+    image: node:13-alpine
+    command: yarn dev
+    ports:
+      - 127.0.0.1:3004:3004
+    volumes:
+      - ./backend-fish:/app
+    working_dir: /app
+  players:
+    image: node:13-alpine
+    command: yarn dev
+    ports:
+      - 127.0.0.1:3003:3003
+    volumes:
+      - ./backend-players:/app
+    working_dir: /app

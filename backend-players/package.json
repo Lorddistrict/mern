@@ -6,7 +6,8 @@
   "author": "Wassim AZIRAR",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js"
+    "start": "nodemon --exec babel-node server.js",
+    "dev": "yarn && yarn start"
   },
   "dependencies": {
     "compression": "^1.7.4",
