@@ -1,4 +1,5 @@
 const appKey = require(`@/lib/app-key`);
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   authMiddleware (req, res, next) {

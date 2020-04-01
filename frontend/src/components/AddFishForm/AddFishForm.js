@@ -11,6 +11,27 @@ const AddFishForm = props => {
     image: ''
   });
 
+  const handleSubmit = async () => {
+    const resp = await fetch(process.env.REACT_APP_BASE_URL + '/fishes', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        name: fish.name,
+        price: fish.price,
+        status: fish.status,
+        desc: fish.desc,
+        image: fish.image,
+      }),
+    });
+
+    if (resp.status === 200) {
+      // ...
+    }
+  };
+
   const onChange = name => event => {
     let newFish = { ...fish };
     newFish[name] = event.target.value;
@@ -19,7 +40,11 @@ const AddFishForm = props => {
 
   function createFish(event) {
     event.preventDefault();
-    props.addFish(fish);
+    //props.addFish(fish);
+
+    handleSubmit();
+
+    // Reset all fields
     setFish({
       name: '',
       price: 0,

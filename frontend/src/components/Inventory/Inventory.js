@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import sampleFishes from '../../sample-fishes';
 import AddFishForm from '../AddFishForm/AddFishForm';
 import EditFishForm from '../EditFishForm/EditFishForm';
 import './Inventory.scss';
+import {Redirect} from 'react-router-dom';
 
 const Inventory = props => {
   const [fishes, setFishes] = useState({});
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      return <Redirect to="/signin"/>;
+    }
+  }, []);
 
   const loadSampleFishes = () => {
     setFishes(sampleFishes);
