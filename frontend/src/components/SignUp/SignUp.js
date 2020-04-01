@@ -7,11 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import { Formik } from 'formik';
-import React from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import React, {useState} from 'react';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
 import './SignUp.scss';
+import {Redirect} from 'react-router-dom';
 
 const validationRules = yup.object().shape({
   email: yup.string().required('Email is required').email('Invalid email address'),
@@ -33,6 +34,29 @@ const useStyles = makeStyles(theme => ({
 const SignUp = () => {
   const classes = useStyles();
 
+  const [redirect, setRedirect] = useState(false);
+
+  const handleSubmit = async (values) => {
+    await fetch(process.env.REACT_APP_BASE_URL+'/users', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+      },
+    });
+
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return <Redirect to="/signin"/>;
+  }
+
   return (
     <div>
       <Formik
@@ -46,20 +70,12 @@ const SignUp = () => {
           acceptTerms: false
         }}
         validationSchema={validationRules}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={ async (values, { setSubmitting }) => {
           setSubmitting(true);
-          setTimeout(() => {
-            setSubmitting(false);
-            toast.info('👍 Your registration has been sent', {
-              position: 'bottom-right',
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: false,
-              pauseOnHover: false,
-              draggable: true
-            });
-          }, 3000);
-        }}>
+          await handleSubmit(values);
+          setSubmitting(false);
+        }}
+      >
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
           <Container component='main' maxWidth='sm'>
             <h1>Signup</h1>
@@ -75,7 +91,8 @@ const SignUp = () => {
                       label='First Name'
                       value={values.firstName}
                       onChange={handleChange}
-                      onBlur={handleBlur}></TextField>
+                      onBlur={handleBlur}
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField

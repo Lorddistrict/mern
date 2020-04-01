@@ -14,7 +14,7 @@ module.exports = {
       return;
     }
     res.send(await User.create({
-      ..._.pick(req.body, `email`, `firstname`, `lastname`),
+      ..._.pick(req.body, `email`, `firstName`, `lastName`),
       password: await bcrypt.hash(`${req.body.password}${appKey}`, saltRounds),
     }));
   },

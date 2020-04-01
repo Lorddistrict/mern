@@ -32,7 +32,10 @@ stop:
 restart:
 	make stop
 	make start
-	cd $(PWD)/backend && yarn start
+
+.PHONY: front ## Start the front
+front:
+	cd frontend && yarn start
 
 .PHONY: exec ## Run bash in the mongodb container
 exec:
