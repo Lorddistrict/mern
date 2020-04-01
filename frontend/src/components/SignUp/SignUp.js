@@ -42,12 +42,12 @@ const SignUp = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
-      },
+      }),
     });
 
     setRedirect(true);

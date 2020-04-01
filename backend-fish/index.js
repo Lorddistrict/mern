@@ -13,10 +13,8 @@ moduleAlias.addAliases({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(cors());
-
 const routes = require(`v1/router`);
 
-routes.forEach(route => app.use(`/api/v1${route.prefix}`, route.router));
+routes.forEach(route => app.use(`/api/v1${route.prefix}`, cors(), route.router));
 
 app.listen(3004, () => console.log(`Listening...`));

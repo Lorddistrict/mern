@@ -29,28 +29,21 @@ const SignIn = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   const handleSubmit = async (values) => {
-
-    try {
-      const token = await fetch(process.env.REACT_APP_BASE_URL + '/auth/login', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          email: values.email,
-          password: values.password,
-        },
-      });
-
-      if (token) {
-        localStorage.setItem('token', token);
-        setIsAuth(true);
-      }
-    } catch(e) {
-      console.log('nope');
+    const resp = await fetch(process.env.REACT_APP_BASE_URL + '/auth/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+      }),
+    });
+    if (resp.status === 200) {
+      const { token } = await resp.json();
+      localStorage.setItem('token', token);
+      setIsAuth(true);
     }
-
-
   };
 
   if (isAuth) {
